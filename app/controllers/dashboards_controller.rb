@@ -1,4 +1,7 @@
 class DashboardsController < ApplicationController
+  require 'json'
+  require 'net/http'
+
   before_action :set_dashboard, only: [:show, :edit, :update, :destroy]
   skip_before_filter :verify_authenticity_token, only: [:opta_stats]
 
@@ -11,8 +14,12 @@ class DashboardsController < ApplicationController
   def opta_stats
     puts '#'*80
     puts 'Post resquest params:', params.inspect
+    puts '-'*80
+    _xml = Net::HTTP.get_response(URI.parse('http://www.optasports.com/media/577563/srml-8-2013-results-mid-season-.xml')).body
+    _json = JSON.parse(Hash.from_xml(_xml).to_json)
+    puts _json
     puts '#'*80
-    render json: { message: 'done' }
+    render json: { message: 'Done', data: _json }
   end
 
   # GET /dashboards/1
