@@ -104,5 +104,6 @@ PLATFORMS
 DEPENDENCIES
   jbuilder (~> 2.0)
   json
+  nokogiri
   pg (= 0.18.2)
   rails (= 4.2.1)
