@@ -1,0 +1,27 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  type: 
+  competition_code: MyString
+  competition_id: MyString
+  competition_name: MyString
+  game_system_id: MyString
+  season_id: MyString
+  season_name: MyString
+  timestamp: MyString
+  match_data: MyText
+  timing_types: MyText
+  team: MyText
+
+two:
+  type: 
+  competition_code: MyString
+  competition_id: MyString
+  competition_name: MyString
+  game_system_id: MyString
+  season_id: MyString
+  season_name: MyString
+  timestamp: MyString
+  match_data: MyText
+  timing_types: MyText
+  team: MyText

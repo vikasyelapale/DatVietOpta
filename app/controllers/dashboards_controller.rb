@@ -58,12 +58,30 @@ class DashboardsController < ApplicationController
 
   def save_opta_stats(json_data)
     json_data = json_data['soccer_feed']['soccer_document']
+    puts '-' * 80
     if json_data['type'] == RESULTS_FEED_TYPE
+      ResultFeed.create_with(feed_type: json_data['type'],
+        competition_name: json_data['competition_name'],
+        season_name: json_data['season_name'],
+        match_data: json_data['match_data'], team: json_data['team'],
+        timing_types: json_data['timing_types'])
+      .find_or_create_by(competition_code: json_data['competition_code'],
+        competition_id: json_data['competition_id'],
+        game_system_id: json_data['game_system_id'],
+        season_id: json_data['season_id'], timestamp: json_data['timestamp'])
       puts '-' * 80, RESULTS_FEED_TYPE
-      # Create record in DB for result_feeds
     elsif json_data['type'] == STANDINGS_FEED_TYPE
+      StandingFeed.create_with(feed_type: json_data['type'],
+        competition_name: json_data['competition_name'],
+        season_name: json_data['season_name'],
+        competition: json_data['competition'], team: json_data['team'],
+        qualification: json_data['qualification'])
+      .find_or_create_by(current_round: json_data['current_round'],
+        competition_code: json_data['competition_code'],
+        competition_id: json_data['competition_id'], round: json_data['round'],
+        game_system_id: json_data['game_system_id'],
+        season_id: json_data['season_id'], timestamp: json_data['timestamp'])
       puts '-' * 80, STANDINGS_FEED_TYPE
-      # Create record in DB for standing_feeds
     end
   end
 end
