@@ -9,16 +9,6 @@ class DashboardsController < ApplicationController
   # GET /dashboards
   # GET /dashboards.json
   def index
-    @success_msg = nil
-    return unless params['post_req_to_opta_stats']
-    begin
-      Net::HTTP.post_form(
-        URI.parse('http://localhost:3000/opta_stats.json'),
-        xml_data: SAMPLE_OPTA_RESULTS_FEED_XML)
-    rescue Net::ReadTimeout
-      nil
-    end
-    @success_msg = 'Done! POST Request Completed for opta_stats API.'
   end
 
   def opta_stats
@@ -27,7 +17,7 @@ class DashboardsController < ApplicationController
 
     # Read XML data from request body and pasrto JSON
     # curl -X POST -d @results.xml http://localhost:3000/opta_stats.json
-    xml_data = params['xml_data'] ? params['xml_data'] : request.body
+    xml_data = request.body
 
     # The only reason to use Nokogiri is - handle character '&' in XML
     parsed_xml_data = Nokogiri::XML(xml_data)
