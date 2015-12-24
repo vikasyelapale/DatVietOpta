@@ -74,4 +74,9 @@ class DashboardsController < ApplicationController
       puts '-' * 80, STANDINGS_FEED_TYPE
     end
   end
+
+  def opta_feeds
+    @result_feeds = ResultFeed.all
+    @standing_feeds = StandingFeed.all
+  end
 end
