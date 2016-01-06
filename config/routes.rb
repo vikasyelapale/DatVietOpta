@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   # You can have the root of your site routed with "root"
   root 'dashboards#index'
   post 'opta_stats' => 'dashboards#opta_stats'
-  get 'opta_feeds' => 'dashboards#opta_feeds'
+  get 'recent_opta_feed' => 'dashboards#recent_opta_feed'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

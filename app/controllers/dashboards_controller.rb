@@ -75,8 +75,19 @@ class DashboardsController < ApplicationController
     end
   end
 
-  def opta_feeds
-    @result_feeds = ResultFeed.all
-    @standing_feeds = StandingFeed.all
+  def recent_opta_feed
+    if ResultFeed.last && StandingFeed.last
+      if ResultFeed.last.created_at < StandingFeed.last.created_at
+        @feed = StandingFeed.last
+      else
+        @feed = ResultFeed.last
+      end
+    elsif ResultFeed.last
+      @feed = ResultFeed.last
+    elsif StandingFeed.last
+      @feed = StandingFeed.last
+    else
+      @feed = { msg: 'No feeds available!' }
+    end
   end
 end
